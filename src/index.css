@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Times New Roman", Times, Baskerville, Georgia, serif;
+  --font-mono: "Times New Roman", Times, Baskerville, Georgia, serif;
+}
+
+/* Global override to force entire web application layout into Times New Roman */
+*, html, body, #root, input, button, select, textarea, p, span, div, text, tspan {
+  font-family: "Times New Roman", Times, Baskerville, Georgia, serif !important;
+}
+
+/* Print Utilities - makes native browser printing exceptionally polished and clean */
+@media print {
+  /* Hide all interactive sidebars, buttons, alerts, headers on print */
+  header, 
+  footer, 
+  #acceptance-form-container, 
+  .print\:hidden,
+  button,
+  input,
+  textarea {
+    display: none !important;
+  }
+
+  /* Reset main layouts to not clip or flex-wrap */
+  body, 
+  main, 
+  html {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    min-height: auto !important;
+  }
+
+  .grid {
+    display: block !important;
+  }
+
+  /* Center-align and expand core A4 sheet for standard printer sizes */
+  #acceptance-letter-document {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 40px !important;
+    margin: 0 auto !important;
+    width: 21cm !important;
+    height: 29.7cm !important;
+    page-break-after: always !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  /* Remove highlight backgrounds and borders when printing natively */
+  #acceptance-letter-document span {
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #0f172a !important;
+  }
+
+  #acceptance-letter-document :global(*) {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Custom CSS animations and smooth layout transitions */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-slow {
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 
+  Avoid html2canvas OKLCH parsing issues by forcing standard Hex/RGB colors 
+  on the printable document canvas and its descendants.
+*/
+#acceptance-letter-document,
+#acceptance-letter-document * {
+  --color-slate-50: #f8fafc !important;
+  --color-slate-100: #f1f5f9 !important;
+  --color-slate-200: #e2e8f0 !important;
+  --color-slate-250: #cbd5e1 !important;
+  --color-slate-300: #cbd5e1 !important;
+  --color-slate-400: #94a3b8 !important;
+  --color-slate-500: #64748b !important;
+  --color-slate-650: #475569 !important;
+  --color-slate-600: #475569 !important;
+  --color-slate-700: #334155 !important;
+  --color-slate-800: #1e293b !important;
+  --color-slate-850: #1e293b !important;
+  --color-slate-900: #0f172a !important;
+  --color-slate-950: #020617 !important;
+
+  --color-indigo-50: #e0e7ff !important;
+  --color-indigo-100: #c7d2fe !important;
+  --color-indigo-150: #b4c6fc !important;
+  --color-indigo-200: #818cf8 !important;
+  --color-indigo-500: #6366f1 !important;
+  --color-indigo-600: #4f46e5 !important;
+  --color-indigo-650: #4f46e5 !important;
+  --color-indigo-700: #4338ca !important;
+  --color-indigo-800: #3730a3 !important;
+  --color-indigo-900: #312e81 !important;
+
+  --color-amber-50: #fffbeb !important;
+  --color-amber-100: #fef3c7 !important;
+  --color-amber-200: #fde68a !important;
+  --color-amber-300: #fcd34d !important;
+  --color-amber-800: #92400e !important;
+  --color-amber-900: #78350f !important;
+
+  --color-emerald-50: #ecfdf5 !important;
+  --color-emerald-100: #d1fae5 !important;
+  --color-emerald-400: #34d399 !important;
+  --color-emerald-500: #10b981 !important;
+  --color-emerald-600: #059669 !important;
+
+  --color-red-50: #fef2f2 !important;
+  --color-red-100: #fee2e2 !important;
+  --color-red-500: #ef4444 !important;
+
+  --color-white: #ffffff !important;
+}
+
+/* Explicit direct class overrides for styles inside the printable element */
+#acceptance-letter-document .text-slate-900 { color: #0f172a !important; }
+#acceptance-letter-document .text-slate-850 { color: #1e293b !important; }
+#acceptance-letter-document .text-slate-800 { color: #1e293b !important; }
+#acceptance-letter-document .text-slate-700 { color: #334155 !important; }
+#acceptance-letter-document .text-slate-600 { color: #475569 !important; }
+#acceptance-letter-document .text-slate-500 { color: #64748b !important; }
+#acceptance-letter-document .text-slate-400 { color: #94a3b8 !important; }
+
+#acceptance-letter-document .text-indigo-900 { color: #312e81 !important; }
+#acceptance-letter-document .text-indigo-800 { color: #3730a3 !important; }
+#acceptance-letter-document .text-indigo-650 { color: #4f46e5 !important; }
+#acceptance-letter-document .text-indigo-600 { color: #4f46e5 !important; }
+
+#acceptance-letter-document .text-amber-800 { color: #92400e !important; }
+
+#acceptance-letter-document .bg-white { background-color: #ffffff !important; }
+#acceptance-letter-document .bg-indigo-50 { background-color: #e0e7ff !important; }
+#acceptance-letter-document .bg-amber-50 { background-color: #fffbeb !important; }
+
+#acceptance-letter-document .border-slate-250 {
+  border-color: #cbd5e1 !important;
+  border-top-color: #cbd5e1 !important;
+  border-bottom-color: #cbd5e1 !important;
+  border-left-color: #cbd5e1 !important;
+  border-right-color: #cbd5e1 !important;
+}
+
+#acceptance-letter-document .border-slate-200 {
+  border-color: #cbd5e1 !important;
+  border-top-color: #cbd5e1 !important;
+  border-bottom-color: #cbd5e1 !important;
+  border-left-color: #cbd5e1 !important;
+  border-right-color: #cbd5e1 !important;
+}
+
+#acceptance-letter-document .border-slate-300 {
+  border-color: #cbd5e1 !important;
+  border-top-color: #cbd5e1 !important;
+  border-bottom-color: #cbd5e1 !important;
+  border-left-color: #cbd5e1 !important;
+  border-right-color: #cbd5e1 !important;
+}
+
+#acceptance-letter-document .border-indigo-150 {
+  border-color: #b4c6fc !important;
+  border-top-color: #b4c6fc !important;
+  border-bottom-color: #b4c6fc !important;
+  border-left-color: #b4c6fc !important;
+  border-right-color: #b4c6fc !important;
+}
+
+#acceptance-letter-document .border-amber-300 {
+  border-color: #fcd34d !important;
+  border-top-color: #fcd34d !important;
+  border-bottom-color: #fcd34d !important;
+  border-left-color: #fcd34d !important;
+  border-right-color: #fcd34d !important;
+}
+

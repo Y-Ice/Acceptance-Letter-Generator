@@ -1,0 +1,6 @@
+{
+  "name": "Acceptance Letter Generator",
+  "description": "A web application to generate, live preview, and download official acceptance letters as PDFs with custom letter layouts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
