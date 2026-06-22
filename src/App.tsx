@@ -18,7 +18,8 @@ import {
   X,
   Send,
   Loader2,
-  Info
+  Info,
+  Smartphone
 } from "lucide-react";
 
 const formatOrdinal = (day: number) => {
@@ -76,6 +77,36 @@ export default function App() {
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [emailForm, setEmailForm] = useState({ to: "", subject: "Your Generated Letter", notes: "" });
   const [sendingEmail, setSendingEmail] = useState(false);
+  
+  // PWA Install Prompt State
+  const [deferredPrompt, setDeferredPrompt] = React.useState<any>(null);
+  const [showInstallBtn, setShowInstallBtn] = React.useState(false);
+
+  React.useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstallBtn(true);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    
+    // Check if app is already running in standalone mode (installed)
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      setShowInstallBtn(false);
+    }
+
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === "accepted") {
+      setDeferredPrompt(null);
+      setShowInstallBtn(false);
+    }
+  };
   
 
 
@@ -142,6 +173,15 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-3">
+            {showInstallBtn && (
+              <button
+                onClick={handleInstallClick}
+                className="flex items-center gap-1.5 px-2 py-1 sm:px-3 sm:py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-sm text-[10px] sm:text-xs font-semibold shadow-xs hover:shadow-xs transition-all active:scale-95 cursor-pointer"
+              >
+                <Smartphone className="w-3.5 h-3.5 animate-pulse" />
+                <span>Install App</span>
+              </button>
+            )}
             <a 
               href="https://nhubfoundation.org" 
               target="_blank" 
