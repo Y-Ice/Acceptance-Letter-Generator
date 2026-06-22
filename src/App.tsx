@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { AcceptanceData } from "./types";
 import { AcceptanceForm } from "./components/AcceptanceForm";
 import { AcceptanceLetter, NHubLogo } from "./components/AcceptanceLetter";
+import appLogoImg from "./assets/images/app_logo_1782140083666.jpg";
 import { DownloadButton } from "./components/DownloadButton";
 import { 
   FileCheck, 
@@ -130,8 +131,8 @@ export default function App() {
       <header className="sticky top-0 z-40 h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 lg:px-8 shrink-0 shadow-sm print:hidden">
         <div className="max-w-7xl w-full mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-indigo-600 rounded-sm flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <div className="w-8 h-8 bg-white border border-slate-200 rounded-sm overflow-hidden flex items-center justify-center">
+              <img src={appLogoImg} alt="Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
             </div>
             <div>
               <h1 className="text-sm font-bold tracking-tight text-slate-900 leading-none">
@@ -418,8 +419,8 @@ export default function App() {
       <footer className="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 print:hidden mt-16 text-xs sm:text-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-sm bg-indigo-600 flex items-center justify-center text-white font-bold text-base shadow-sm">
-              A
+            <div className="w-8 h-8 rounded-sm bg-white overflow-hidden flex items-center justify-center shadow-sm">
+              <img src={appLogoImg} alt="Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
             </div>
             <div>
               <p className="text-slate-200 font-bold">Acceptance Letter</p>

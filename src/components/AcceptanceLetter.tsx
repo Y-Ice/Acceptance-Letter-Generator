@@ -1,6 +1,7 @@
 import React from "react";
 import { AcceptanceData, LETTER_TEMPLATES } from "../types";
 import nhubWatermarkImg from "../assets/images/nhub_watermark_1782037100337.jpg";
+import appLogoImg from "../assets/images/app_logo_1782140083666.jpg";
 
 // Dynamic SVG logo matching DocuGen and nHub Foundation branding under Geometric Balance theme
 export const NHubLogo = ({
@@ -266,8 +267,20 @@ export const AcceptanceLetter = React.forwardRef<HTMLDivElement, AcceptanceLette
             {/* Header / Letterhead Block */}
             <div className="w-full flex flex-col">
               
-              {/* Top Banner Grid (Aligned to the Right) */}
-              <div className="flex justify-end w-full bg-transparent pb-1">
+              {/* Top Banner Grid (Side-by-Side Logo & Contact Info) */}
+              <div className="flex justify-between items-center w-full bg-transparent pb-1">
+                {/* Left Side: Logo */}
+                <div className="flex items-center">
+                  {data.hasLogo && (
+                    <img 
+                      id="letter-header-logo-img"
+                      src={appLogoImg} 
+                      alt="nhub Foundation Logo" 
+                      className="w-16 h-16 object-contain rounded border border-slate-100 shadow-xs" 
+                      referrerPolicy="no-referrer"
+                    />
+                  )}
+                </div>
                 
                 {/* Sender Formal Contact Info (Right Aligned) */}
                 <div className="text-right text-xs max-w-xs text-black space-y-0.5 leading-relaxed">
